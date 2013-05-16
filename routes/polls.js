@@ -21,12 +21,12 @@ exports.index = function (req, res) {
 
 exports.create = function (req, res) {
     new Poll({
-        title    : req.body.pname,
+        name : req.body.pname,
         description : req.body.pquestion,
         polloptions: [{ name: req.body.poption1, votes: 0 }, { name: req.body.poption2, votes: 0 }],
         created_at : Date.now()
     }).save( function( err, poll, count ){
-            res.redirect( '/polls/' + poll._id + ".json" );
+            res.redirect( '/polls/' + poll._id);
         });
 };
 
@@ -46,7 +46,7 @@ exports.show = function (req, res) {
                     break;
                 // Else render a database template (this isn't ready yet)
                 default:
-                    res.render('index', { error: 'Failed search!'});
+                    res.render('show', { poll: poll });
             }
         }
         else {

@@ -1,0 +1,23 @@
+extends layout
+
+block scripts
+    script(type='text/javascript', src='/javascripts/poll_show.js')
+
+block content
+    #page1(data-role='page')
+        div(data-theme='a', data-role='header')
+            h3#header= "Voted: " + poll.name
+        h3= poll.description
+        div(data-role='content')
+            ul(data-role='listview', data-divider-theme='b', data-inset='true')
+                li(data-role='list-divider', role='heading')
+                    | Poll Options
+                li(data-theme='c')
+                    a(href='#page1', data-transition='slide')
+                        | Button1
+                li(data-theme='c')
+                    a(href='#page1', data-transition='slide')
+                        | Button2
+        #qrcode
+    #hdata(pid=poll._id)
+
