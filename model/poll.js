@@ -5,7 +5,7 @@ var pollSchema = new mongoose.Schema({
     description: String,
     adm: String,
     shortlink: String,
-    pollcreated: Date,
+    created_at: Date,
     polloptions: [{ name: String, votes: Number }]
 });
 

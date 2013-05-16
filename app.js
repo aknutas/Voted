@@ -9,7 +9,7 @@ var express = require('express')
     , resource = require('express-resource')
     , http = require('http')
     , path = require('path')
-    , forms = require('forms');
+    , forms = require('express-validator');
 
 var app = express();
 

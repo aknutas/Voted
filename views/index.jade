@@ -1,5 +1,39 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    #page1(data-role='page')
+        div(data-theme='a', data-role='header')
+            h3#header
+                | Voted: The Easier Polling Option
+        div(data-role='content')
+            h2
+                | Create your poll
+            form(action='/polls', method='post')
+                div(data-role='fieldcontain')
+                    label(for='textinput1')
+                        | Poll name
+                    input#textinput1(name='pname', placeholder='', value='', type='text')
+                div(data-role='fieldcontain')
+                    label(for='textinput2')
+                        | Question
+                    input#textinput2(name='pquestion', placeholder='', value='', type='text')
+                div(data-role='fieldcontain')
+                    label(for='textinput3')
+                        | Option 1
+                    input#textinput3(name='poption1', placeholder='', value='', type='text')
+                div(data-role='fieldcontain')
+                    label(for='textinput4')
+                        | Option 2
+                    input#textinput4(name='poption2', placeholder='', value='', type='text')
+                div(data-role='fieldcontain')
+                    label(for='toggleswitch1')
+                        | Public
+                    select#toggleswitch1(name='toggleswitch1', data-theme='', data-role='slider')
+                        option(value='off')
+                            | Off
+                        option(value='on')
+                            | On
+                input(type='submit', value='Submit')
+        div(data-theme='a', data-role='footer', data-position='fixed')
+            h3#footer
+                | Copr. 2013 A.K. & J.I.

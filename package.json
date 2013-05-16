@@ -12,7 +12,7 @@
     "mongoose": "*",
     "socket.io": "*",
     "async": "*",
-    "forms": "*",
+    "express-validator": "*",
     "express-resource": "*"
   }
 }

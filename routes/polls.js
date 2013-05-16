@@ -1,11 +1,18 @@
-var Poll = require('../model/polls');
+var Poll = require('../model/poll');
 
 /*
- * GET polls listing.
+ * GET polls index
  */
 
 exports.index = function (req, res) {
-    res.send("respond with a resource");
+    Poll.find(function (err, polls) {
+        if (!err && polls) {
+            res.send(JSON.stringify(polls));
+        }
+        else {
+            res.send("FAIL! " + err);
+        }
+    });
 };
 
 /*
@@ -13,46 +20,37 @@ exports.index = function (req, res) {
  */
 
 exports.create = function (req, res) {
-    reg_form.handle(req, {
-        success: function (form) {
-            res.render('page', {
-                locals: {
-                    title: 'Success!'
-                }
-            });
-        },
-        other: function (form) {
-            res.render('page', {
-                locals: {
-                    title: 'Failed!',
-                    form: form.toHTML()
-                }
-            });
-        }
-    });
+    new Poll({
+        title    : req.body.pname,
+        description : req.body.pquestion,
+        polloptions: [{ name: req.body.poption1, votes: 0 }, { name: req.body.poption2, votes: 0 }],
+        created_at : Date.now()
+    }).save( function( err, poll, count ){
+            res.redirect( '/polls/' + poll._id + ".json" );
+        });
 };
+
+/*
+ * GET a poll by id
+ */
 
 // :format can be json or html
 exports.show = function (req, res) {
-    console.log("HERE0");
-    Poll.find(function (err, polls) {
-        if (!err && polls) {
-            console.log("HERE1");
+    Poll.findOne({ '_id': req.params.poll }, function (err, poll) {
+        console.log(poll);
+        if (!err && poll) {
             switch (req.params.format) {
                 // When json, generate suitable data
                 case 'json':
-                    console.log("HERE2");
-                    res.send(JSON.stringify(polls));
+                    res.send(JSON.stringify(poll));
                     break;
-
                 // Else render a database template (this isn't ready yet)
                 default:
-                    console.log("HERE3");
-                    res.render('index.jade');
+                    res.render('index', { error: 'Failed search!'});
             }
         }
         else {
-            res.send("FAIL! " + err);
+            res.render('index', { error: 'Failed search!'});
         }
     });
 };
