@@ -11,6 +11,8 @@
     "connect": "*",
     "mongoose": "*",
     "socket.io": "*",
-    "async": "*"
+    "async": "*",
+    "forms": "*",
+    "express-resource": "*"
   }
 }
