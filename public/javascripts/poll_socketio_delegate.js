@@ -5,7 +5,11 @@ $( document ).delegate("#pollshow", "pageinit", function() {
     socket.emit('subscribe', pid);
 
     socket.on('update', function (data) {
-        console.log("Update data: " + data);
+        console.log("Update data: " + data.poll);
+        if(data.success){
+            $('#bc1').text(" " + data.poll.polloptions[0].votes + " ");
+            $('#bc2').text(" " + data.poll.polloptions[1].votes + " ");
+        }
     });
 
     $('#button1').click(function() {

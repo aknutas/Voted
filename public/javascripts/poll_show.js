@@ -7,13 +7,10 @@ $(document).ready(function() {
     socket.emit('subscribe', pid);
 
     socket.on('update', function (data) {
-        console.log("Update data: " + data.message);
-        if(data.message == 0){
-            var nn = Number($('#bc1').text()) + 1;
-            $('#bc1').text(" " + nn + " ");
-        } else if(data.message == 1){
-            var nn = Number($('#bc2').text()) + 1;
-            $('#bc2').text(" " + nn + " ");
+        console.log("Update data: " + data.poll);
+        if(data.success){
+            $('#bc1').text(" " + data.poll.polloptions[0].votes + " ");
+            $('#bc2').text(" " + data.poll.polloptions[1].votes + " ");
         }
     });
 

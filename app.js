@@ -56,7 +56,9 @@ io.sockets.on('connection', function (socket) {
             if (!err && poll) {
                 console.log(poll);
                 poll.polloptions[data.message].votes = poll.polloptions[data.message].votes + 1;
-                io.sockets.in(data.pchannel).emit('update', poll);
+                data.success = true;
+                data.poll = poll;
+                io.sockets.in(data.pchannel).emit('update', data);
                 poll.save(function (err, poll) {
                     console.log(poll);
                 });
