@@ -52,6 +52,6 @@ io.sockets.on('connection', function (socket) {
     });
     socket.on('vote', function(data) {
         console.log('got vote');
-        io.sockets.in(data.channel).emit('update', data.message);
+        io.sockets.in(data.pchannel).emit('update', data);
     });
 });

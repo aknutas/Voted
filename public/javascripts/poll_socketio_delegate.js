@@ -5,13 +5,20 @@ $( document ).delegate("#pollshow", "pageinit", function() {
     socket.emit('subscribe', pid);
 
     socket.on('update', function (data) {
-        console.log(data);
+        console.log("Update data: " + data.message);
+        if(data.message == 0){
+            var nn = Number($('#bc1').text()) + 1;
+            $('#bc1').text(" " + nn + " ");
+        } else if(data.message == 1){
+            var nn = Number($('#bc2').text()) + 1;
+            $('#bc2').text(" " + nn + " ");
+        }
     });
 
     $('#button1').click(function() {
-        socket.emit('vote', { channel: pid, message: 0 });
+        socket.emit('vote', { pchannel: pid, message: 0 });
     });
     $('#button2').click(function() {
-        socket.emit('vote', { channel: pid, message: 1 });
+        socket.emit('vote', { pchannel: pid, message: 1 });
     });
 });

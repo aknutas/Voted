@@ -14,9 +14,15 @@ block content
                 li(data-role='list-divider', role='heading')
                     | Poll Options
                 li#button1(data-theme='c')
-                    button= poll.polloptions[0].name + ": " + '<span id="bc1">' + poll.polloptions[0].votes + '</span>'
+                    button
+                        | Option #{poll.polloptions[0].name}:
+                        span#bc1 #{" " + poll.polloptions[0].votes + " "}
+                        | votes
                 li#button2(data-theme='c')
-                    button= poll.polloptions[1].name + ": " + '<span id="bc2">' + poll.polloptions[1].votes + '</span>'
+                    button
+                        | Option #{poll.polloptions[1].name}:
+                        span#bc2 #{" " + poll.polloptions[1].votes + " "}
+                        | votes
         #qrcode
         #hdata(pid=poll._id)
 
