@@ -2,6 +2,7 @@ extends layout
 
 block scripts
     script(type='text/javascript', src='/javascripts/poll_show.js')
+    script(type='text/javascript', src='/socket.io/socket.io.js')
 
 block content
     #pollshow(data-role='page')
@@ -12,12 +13,10 @@ block content
             ul(data-role='listview', data-divider-theme='b', data-inset='true')
                 li(data-role='list-divider', role='heading')
                     | Poll Options
-                li(data-theme='c')
-                    a(href='#page1', data-transition='slide')
-                        | Button1
-                li(data-theme='c')
-                    a(href='#page1', data-transition='slide')
-                        | Button2
+                li#button1(data-theme='c')
+                    button= poll.polloptions[0].name + ": " + '<span id="bc1">' + poll.polloptions[0].votes + '</span>'
+                li#button2(data-theme='c')
+                    button= poll.polloptions[1].name + ": " + '<span id="bc2">' + poll.polloptions[1].votes + '</span>'
         #qrcode
     #hdata(pid=poll._id)
 

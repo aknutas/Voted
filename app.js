@@ -34,10 +34,23 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+//Setting up socket listeners
 app.get('/', require('./routes/index').index);
 app.resource('polls', require('./routes/polls'));
 
 var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
 var io = require('socket.io').listen(server);
+
+//Socket IO server functions
+io.sockets.on('connection', function (socket) {
+    socket.on('subscribe', function(data) {
+        socket.join(data);
+    });
+    socket.on('vote', function(data) {
+        console.log('got vote');
+        io.sockets.in(data.room).emit('update', data);
+    });
+});
