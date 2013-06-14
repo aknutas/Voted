@@ -45,13 +45,22 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 var io = require('socket.io').listen(server);
 
 //Socket IO server functions
+var Poll = require('./model/poll');
 io.sockets.on('connection', function (socket) {
-    socket.on('subscribe', function(data) {
+    socket.on('subscribe', function (data) {
         console.log("Client " + socket.id + " joined channel " + data);
         socket.join(data);
     });
-    socket.on('vote', function(data) {
-        console.log('got vote');
-        io.sockets.in(data.pchannel).emit('update', data);
+    socket.on('vote', function (data) {
+        Poll.findOne({ '_id': data.pchannel }, function (err, poll) {
+            if (!err && poll) {
+                console.log(poll);
+                poll.polloptions[data.message].votes = poll.polloptions[data.message].votes + 1;
+                io.sockets.in(data.pchannel).emit('update', poll);
+                poll.save(function (err, poll) {
+                    console.log(poll);
+                });
+            }
+        });
     });
 });
