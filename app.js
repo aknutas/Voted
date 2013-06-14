@@ -47,10 +47,11 @@ var io = require('socket.io').listen(server);
 //Socket IO server functions
 io.sockets.on('connection', function (socket) {
     socket.on('subscribe', function(data) {
+        console.log("Client " + socket.id + " joined channel " + data);
         socket.join(data);
     });
     socket.on('vote', function(data) {
         console.log('got vote');
-        io.sockets.in(data.room).emit('update', data);
+        io.sockets.in(data.channel).emit('update', data.message);
     });
 });
