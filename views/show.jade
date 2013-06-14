@@ -4,7 +4,7 @@ block scripts
     script(type='text/javascript', src='/javascripts/poll_show.js')
 
 block content
-    #page1(data-role='page')
+    #pollshow(data-role='page')
         div(data-theme='a', data-role='header')
             h3#header= "Voted: " + poll.name
         h3= poll.description

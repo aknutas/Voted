@@ -44,7 +44,6 @@ exports.show = function (req, res) {
                 case 'json':
                     res.send(JSON.stringify(poll));
                     break;
-                // Else render a database template (this isn't ready yet)
                 default:
                     res.render('show', { poll: poll });
             }
