@@ -23,7 +23,8 @@ block content
                         | Option #{poll.polloptions[1].name}:
                         span#bc2 #{" " + poll.polloptions[1].votes + " "}
                         | votes
-        #qrcode
+        #qrcontainer(data-theme='a', data-role="fieldcontain")
+            #qrcode
         #hdata(pid=poll._id)
 
 
