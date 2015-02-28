@@ -1,1 +1,1 @@
-A simple polling server with QR link generation and Socket.IO communication implemented in Node.JS. Meant as a simple example project.
+A simple polling server with QR link generation, Mongoose backend and Socket.IO communication implemented in Node.JS. Meant as a simple example project.
